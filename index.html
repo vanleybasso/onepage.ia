@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- METADADOS BÁSICOS -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OnePage - Páginas Profissionais</title>
+  
+  <!-- FAVICONS PARA MODO CLARO E ESCURO -->
+  <!-- Favicon para modo claro -->
+  <link rel="icon" href="/imagens/ChatGPT Image 29 de jul. de 2025, 15_02_09.png" media="(prefers-color-scheme: light)" type="image/png">
+  <!-- Favicon para modo escuro -->
+  <link rel="icon" href="/imagens/Logo moderno OnePage Studio.png" media="(prefers-color-scheme: dark)" type="image/png">
+  
+  <!-- BIBLIOTECA DE ÍCONES -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- ESTILOS CSS -->
+  <style>
+    /**
+     * VARIÁVEIS CSS
+     * Definindo variáveis para cores e estilos que serão reutilizados
+     * As variáveis são diferentes para os modos claro e escuro
+     */
+    :root {
+      /* Cores base */
+      --primary-color: #007BFF;       /* Azul primário */
+      --primary-hover: #0069d9;       /* Azul mais escuro para hover */
+      --dark-color: #2c3e50;          /* Cor para texto escuro */
+      --light-bg: #f8f9fa;            /* Cor de fundo clara */
+      --white: #ffffff;               /* Branco */
+      --gray: #6c757d;                /* Cinza para texto secundário */
+      --light-gray: #e9ecef;          /* Cinza claro para fundos */
+      --transition: all 0.3s ease;    /* Transição padrão para animações */
+      
+      /* Variáveis para modo claro (padrão) */
+      --bg-color: var(--light-bg);                /* Cor de fundo do body */
+      --text-color: var(--dark-color);            /* Cor do texto principal */
+      --card-bg: var(--white);                    /* Cor de fundo dos cards */
+      --footer-bg: #f8f9fa;                       /* Cor de fundo do footer */
+      --footer-border: #e9ecef;                   /* Cor da borda do footer */
+      --header-bg: var(--white);                  /* Cor de fundo do header */
+      --testimonials-bg: var(--white);             /* Cor de fundo da seção de depoimentos */
+      
+      /* Gradiente animado para o hero (só no modo claro) */
+      --hero-gradient: linear-gradient(135deg, 
+        rgba(0, 123, 255, 0.9) 0%, 
+        rgba(0, 86, 179, 0.9) 20%, 
+        rgba(0, 64, 133, 0.9) 40%, 
+        rgba(0, 105, 217, 0.9) 60%, 
+        rgba(0, 123, 255, 0.9) 80%, 
+        rgba(65, 155, 255, 0.9) 100%);
+      --hero-bg-size: 200% 200%;                  /* Tamanho do gradiente animado */
+      --hero-animation: gradientAnimation 8s ease infinite; /* Animação do gradiente */
+    }
+
+    /**
+     * VARIÁVEIS PARA MODO ESCURO
+     * Sobrescreve as variáveis padrão quando o tema escuro está ativo
+     */
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a;                       /* Fundo mais escuro */
+      --text-color: #f0f0f0;                     /* Texto claro */
+      --card-bg: #2d2d2d;                        /* Cards mais escuros */
+      --footer-bg: #121212;                      /* Footer mais escuro */
+      --footer-border: #333;                     /* Borda mais escura */
+      --header-bg: #121212;                      /* Header mais escuro */
+      --testimonials-bg: #2d2d2d;                /* Fundo de depoimentos escuro */
+      --light-bg: #1a1a1a;                       /* Fundo claro ajustado */
+      --dark-color: #f0f0f0;                     /* Texto escuro vira claro */
+      --white: #2d2d2d;                          /* Branco ajustado */
+      --gray: #a0a0a0;                           /* Cinza mais claro */
+      --light-gray: #333;                         /* Cinza claro mais escuro */
+      
+      /* Gradiente mais simples para modo escuro */
+      --hero-gradient: linear-gradient(135deg, #0069d9, #007BFF, #0069d9);
+      --hero-bg-size: 100% 100%;                 /* Sem animação no modo escuro */
+      --hero-animation: none;                    /* Remove animação */
+    }
+
+    /**
+     * ESTILO DO LOGO NO MODO ESCURO
+     * Inverte as cores do logo para melhor contraste
+     */
+    [data-theme="dark"] .logo img {
+      filter: brightness(0) invert(1) grayscale(1) contrast(1000%);
+    }
+
+    /**
+     * RESET BÁSICO
+     * Remove margens e paddings padrão e define box-sizing
+     */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /**
+     * ESTILOS GERAIS DO BODY
+     */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: var(--transition); /* Transição suave para mudança de tema */
+    }
+
+    /**
+     * CONTAINER PRINCIPAL
+     * Centraliza o conteúdo e define largura máxima
+     */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ==================== */
+    /* ESTILOS DO HEADER */
+    /* ==================== */
+    header {
+      background-color: var(--header-bg);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+      padding: 0 20px;
+    }
+
+    /* Logo */
+    .logo {
+      cursor: pointer;
+    }
+
+    .logo img {
+      height: 120px;
+      transition: var(--transition);
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ==================== */
+    /* BOTÃO DE ALTERAR TEMA */
+    /* ==================== */
+    .theme-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: var(--primary-hover);
+      transform: scale(1.1);
+    }
+
+    /* ==================== */
+    /* NAVEGAÇÃO PRINCIPAL */
+    /* ==================== */
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    /* Efeito de sublinhado animado */
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      bottom: -5px;
+      left: 0;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* ==================== */
+    /* MENU MOBILE */
+    /* ==================== */
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--text-color);
+    }
+
+    /* ==================== */
+    /* SEÇÃO HERO */
+    /* ==================== */
+    .hero, .cta {
+      background: var(--hero-gradient);
+      background-size: var(--hero-bg-size);
+      animation: var(--hero-animation);
+      color: var(--white);
+      text-align: center;
+    }
+
+    /* Animação do gradiente (só no modo claro) */
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .hero {
+      padding: 150px 0 100px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease;
+    }
+
+    .hero p, .cta p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    /* ==================== */
+    /* ESTILOS DAS SEÇÕES */
+    /* ==================== */
+    section {
+      padding: 80px 0;
+      transition: var(--transition);
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2rem;
+      position: relative;
+      color: var(--text-color);
+    }
+
+    /* Linha decorativa abaixo dos títulos */
+    section h2::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    /* ==================== */
+    /* ESTILOS DOS CARDS */
+    /* (Benefícios, Serviços, Depoimentos) */
+    /* ==================== */
+    .benefits-grid, 
+    .services-container,
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .benefit-card,
+    .service-card,
+    .testimonial-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: var(--transition);
+      color: var(--text-color);
+    }
+
+    /* Efeito de levantar ao passar o mouse */
+    .benefit-card:hover,
+    .service-card:hover,
+    .testimonial-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    /* Cards de Benefícios */
+    .benefit-card {
+      text-align: center;
+    }
+
+    .benefit-icon {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .benefit-card h3,
+    .service-content h3 {
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    /* ==================== */
+    /* SEÇÃO DE PROCESSO */
+    /* ==================== */
+    .process-steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 250px;
+      max-width: 300px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      position: relative;
+      text-align: center;
+      color: var(--text-color);
+    }
+
+    /* Número do passo */
+    .step-number {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: var(--primary-color);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* ==================== */
+    /* SEÇÃO DE SERVIÇOS */
+    /* ==================== */
+    .service-card {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .service-img {
+      height: 200px;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 3rem;
+    }
+
+    .service-content {
+      padding: 25px;
+    }
+
+    .service-content ul {
+      list-style: none;
+    }
+
+    .service-content li {
+      margin-bottom: 10px;
+      padding-left: 25px;
+      position: relative;
+      color: var(--text-color);
+    }
+
+    /* Ícone de check nos itens da lista */
+    .service-content li::before {
+      content: '✓';
+      color: var(--primary-color);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    /* ==================== */
+    /* SEÇÃO CTA (CALL TO ACTION) */
+    /* ==================== */
+    .cta {
+      padding: 80px 0;
+    }
+
+    .cta h2 {
+      color: var(--white);
+    }
+
+    .cta h2::after {
+      background: var(--white);
+    }
+
+    /* Container de botões */
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    /* Estilos base dos botões */
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    /* Botão primário */
+    .btn-primary {
+      background: var(--white);
+      color: var(--primary-color);
+      border: 2px solid var(--white);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--white);
+    }
+
+    /* Botão outline */
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid var(--white);
+    }
+
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--primary-color);
+    }
+
+    /* ==================== */
+    /* RODAPÉ */
+    /* ==================== */
+    footer {
+      background: var(--footer-bg);
+      color: var(--gray);
+      padding: 50px 0 20px;
+      border-top: 1px solid var(--footer-border);
+      transition: var(--transition);
+    }
+
+    .footer-container {
+      padding-left: 80px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 40px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .footer-column:first-child {
+      max-width: 280px;
+    }
+
+    .footer-column h3 {
+      color: var(--text-color);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .footer-column li {
+      margin-bottom: 10px;
+      color: var(--gray);
+    }
+
+    .footer-column a {
+      color: var(--gray);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-column a:hover {
+      color: var(--primary-color);
+      padding-left: 5px;
+    }
+
+    /* Links sociais */
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      color: var(--text-color);
+      background: var(--light-gray);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background: var(--primary-color);
+      color: var(--white);
+    }
+
+    /* Copyright */
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--footer-border);
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* ==================== */
+    /* SEÇÃO DE DEPOIMENTOS */
+    /* ==================== */
+    .testimonials {
+      background-color: var(--testimonials-bg);
+      transition: var(--transition);
+    }
+
+    /* Avaliação por estrelas */
+    .rating {
+      color: #FFD700;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 20px;
+      color: var(--text-color);
+      position: relative;
+    }
+
+    /* Aspas decorativas */
+    .testimonial-text::before,
+    .testimonial-text::after {
+      content: '"';
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      opacity: 0.5;
+    }
+
+    /* Informações do cliente */
+    .client-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .client-avatar {
+      width: 50px;
+      height: 50px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .client-info h4 {
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+
+    .client-role {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* ==================== */
+    /* ANIMAÇÕES */
+    /* ==================== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==================== */
+    /* ESTILOS RESPONSIVOS */
+    /* ==================== */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      section {
+        padding: 60px 0;
+      }
+
+      .footer-container {
+        padding-left: 40px;
+      }
+      
+      .footer-content {
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 15px;
+      }
+      
+      /* Mostra o toggle do menu mobile */
+      .menu-toggle {
+        display: block;
+      }
+      
+      /* Estilo do menu mobile */
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--header-bg);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 40px;
+        transition: var(--transition);
+      }
+      
+      /* Classe ativa para mostrar o menu */
+      .nav-links.active {
+        left: 0;
+      }
+      
+      .nav-links li {
+        margin: 15px 0;
+      }
+      
+      .hero {
+        padding: 120px 0 80px;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p, .cta p {
+        font-size: 1rem;
+      }
+      
+      section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+      }
+      
+      .btn {
+        padding: 12px 25px;
+        min-width: 160px;
+      }
+
+      .footer-container {
+        padding-left: 20px;
+      }
+      
+      /* Footer em uma coluna */
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        max-width: 100%;
+      }
+      
+      .footer-column:first-child {
+        max-width: 100%;
+      }
+
+      /* Depoimentos em uma coluna */
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .testimonial-card {
+        padding: 20px;
+      }
+    }
+
+    /* Efeito de zoom na foto do escritório */
+    .office-photo:hover img {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 576px) {
+      .hero {
+        padding: 100px 0 60px;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      section {
+        padding: 50px 0;
+      }
+      
+      /* Benefícios e serviços em uma coluna */
+      .benefits-grid,
+      .services-container {
+        grid-template-columns: 1fr;
+      }
+      
+      /* Passos do processo em coluna */
+      .process-steps {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .step {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    /* ==================== */
+    /* SEÇÃO SOBRE */
+    /* ==================== */
+    .about {
+      background-color: var(--card-bg);
+      padding: 80px 0;
+    }
+    
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 50px;
+    }
+    
+    .about-text {
+      padding-right: 20px;
+    }
+    
+    .about-text p {
+      margin-bottom: 30px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    
+    /* Estatísticas */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .stat-card {
+      background: var(--primary-color);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    /* Missão, Visão e Valores */
+    .mission-vision {
+      display: grid;
+      gap: 20px;
+    }
+    
+    .mv-card {
+      background: var(--bg-color);
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .mv-card h3 {
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .mv-card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    
+    .mv-card li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .mv-card i {
+      color: var(--primary-color);
+    }
+    
+    /* Responsivo para a seção sobre */
+    @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-text {
+        padding-right: 0;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ==================== -->
+  <!-- CABEÇALHO -->
+  <!-- ==================== -->
+  <header>
+    <div class="container header-container">
+      <!-- Logo clicável -->
+      <div class="logo">
+        <img src="/imagens/logo.png" alt="Logo OnePage" />
+      </div>
+      
+      <!-- Navegação principal -->
+      <ul class="nav-links">
+        <li><a href="#benefits">benefícios</a></li>
+        <li><a href="#process">como funciona</a></li>
+        <li><a href="#services">serviços</a></li>
+        <li><a href="#about">sobre</a></li>
+        <li><a href="#cta">contato</a></li>
+      </ul>
+      
+      <!-- Botão do menu mobile -->
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Botão para alternar entre temas claro e escuro -->
+  <button class="theme-toggle" aria-label="Alternar tema">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- ==================== -->
+  <!-- SEÇÃO HERO -->
+  <!-- ==================== -->
+  <section class="hero">
+    <div class="container">
+      <h1>páginas inteligentes para negócios ambiciosos</h1>
+      <p>transforme visitantes em clientes com páginas de alta conversão, design moderno e performance excepcional.</p>
+      <div class="btn-container">
+        <a href="#cta" class="btn btn-outline">começar agora</a>
+        <a href="#services" class="btn btn-outline">ver serviços</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== -->
+  <!-- SEÇÃO DE BENEFÍCIOS -->
+  <!-- ==================== -->
+  <section id="benefits" class="benefits">
+    <div class="container">
+      <h2>benefícios de ter uma landing page</h2>
+      <div class="benefits-grid">
+        <!-- Card de benefício 1 -->
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>alta conversão</h3>
+          <p>páginas otimizadas para transformar visitantes em clientes e aumentar suas vendas.</p>
+        </div>
+        
+        <!-- Card de benefício 2 -->
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>responsividade</h3>
+          <p>design perfeito em todos os dispositivos, desde smartphones até desktops.</p>
+        </div>
+        
+        <!-- Card de benefício 3 -->
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <h3>design moderno</h3>
+          <p>interfaces atraentes e profissionais que transmitem credibilidade.</p>
+        </div>
+        
+        <!-- Card de benefício 4 -->
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>carregamento rápido</h3>
+          <p>otimização para performance que reduz a taxa de rejeição e melhora o SEO.</p>
+        </div>
+        
+        <!-- Card de benefício 5 -->
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-funnel-dollar"></i>
+          </div>
+          <h3>foco em resultados</h3>
+          <p>páginas construídas com estratégias comprovadas para maximizar suas conversões.</p>
+        </div>
+        
+        <!-- Card de benefício 6 -->
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <i class="fas fa-sliders-h"></i>
+          </div>
+          <h3>personalização total</h3>
+          <p>design e funcionalidades adaptados às necessidades específicas do seu negócio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== -->
+  <!-- SEÇÃO DE PROCESSO -->
+  <!-- ==================== -->
+  <section id="process" class="process">
+    <div class="container">
+      <h2>como funciona?</h2>
+      <div class="process-steps">
+        <!-- Passo 1 -->
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>consulta inicial</h3>
+          <p>agendamos uma reunião para entender suas necessidades e objetivos.</p>
+        </div>
+        
+        <!-- Passo 2 -->
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>definição do projeto</h3>
+          <p>alinhamos o tipo ideal de landing page para seu negócio.</p>
+        </div>
+        
+        <!-- Passo 3 -->
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>proposta personalizada</h3>
+          <p>enviamos um orçamento detalhado com escopo e prazos.</p>
+        </div>
+        
+        <!-- Passo 4 -->
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>desenvolvimento</h3>
+          <p>criamos e entregamos sua landing page profissional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== -->
+  <!-- SEÇÃO DE SERVIÇOS -->
+  <!-- ==================== -->
+  <section id="services" class="services">
+    <div class="container">
+      <h2>nossos tipos de páginas</h2>
+      <div class="services-container">
+        <!-- Serviço 1 -->
+        <div class="service-card">
+          <div class="service-img">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="service-content">
+            <h3>páginas institucionais</h3>
+            <ul>
+              <li>apresentação profissional da sua empresa</li>
+              <li>destaque para missão, visão e valores</li>
+              <li>galeria de projetos e clientes</li>
+              <li>design que transmite confiança</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Serviço 2 -->
+        <div class="service-card">
+          <div class="service-img">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="service-content">
+            <h3>portfólios profissionais</h3>
+            <ul>
+              <li>destaque para seu trabalho e habilidades</li>
+              <li>galeria de projetos com cases</li>
+              <li>biografia profissional atraente</li>
+              <li>integração com redes sociais</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Serviço 3 -->
+        <div class="service-card">
+          <div class="service-img">
+            <i class="fas fa-palette"></i>
+          </div>
+          <div class="service-content">
+            <h3>páginas criativas</h3>
+            <ul>
+              <li>para artistas, designers e criativos</li>
+              <li>galerias de trabalhos interativas</li>
+              <li>design único e personalizado</li>
+              <li>integração com plataformas artísticas</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Serviço 4 -->
+        <div class="service-card">
+          <div class="service-img">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="service-content">
+            <h3>páginas de serviços</h3>
+            <ul>
+              <li>apresentação completa de seus serviços</li>
+              <li>diferenciais competitivos</li>
+              <li>depoimentos de clientes</li>
+              <li>formulários de contato estratégicos</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Serviço 5 -->
+        <div class="service-card">
+          <div class="service-img">
+            <i class="fas fa-box-open"></i>
+          </div>
+          <div class="service-content">
+            <h3>páginas de produtos</h3>
+            <ul>
+              <li>destaque para características técnicas</li>
+              <li>galeria com fotos em alta resolução</li>
+              <li>especificações e documentação</li>
+              <li>integração com catálogos digitais</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Serviço 6 -->
+        <div class="service-card">
+          <div class="service-img">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div class="service-content">
+            <h3>páginas para eventos</h3>
+            <ul>
+              <li>lançamentos, workshops e conferências</li>
+              <li>programação completa do evento</li>
+              <li>inscrições online integradas</li>
+              <li>galeria de edições anteriores</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ==================== -->
+<!-- SEÇÃO DE DEPOIMENTOS -->
+<!-- ==================== -->
+<section id="testimonials" class="testimonials">
+  <div class="container">
+    <h2>o que nossos clientes dizem</h2>
+    <div class="testimonials-grid">
+      <!-- Depoimento 1 -->
+      <div class="testimonial-card">
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">A OnePage transformou completamente meu negócio! A landing page que criaram aumentou minhas conversões em 300%. Profissionais incríveis!</p>
+        <div class="client-info">
+          <div class="client-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <div>
+            <h4>Ana Carolina</h4>
+            <p class="client-role">Empreendedora Digital</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Depoimento 2 -->
+      <div class="testimonial-card">
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">Finalmente encontrei uma equipe que entende exatamente o que preciso. O portfólio que desenvolveram para mim superou todas as expectativas.</p>
+        <div class="client-info">
+          <div class="client-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <div>
+            <h4>Ricardo Almeida</h4>
+            <p class="client-role">Fotógrafo Profissional</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Depoimento 3 -->
+      <div class="testimonial-card">
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">Atendimento excepcional e entrega antes do prazo! Minha página de serviços agora é minha principal ferramenta de captação de clientes.</p>
+        <div class="client-info">
+          <div class="client-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <div>
+            <h4>Mariana Santos</h4>
+            <p class="client-role">Consultora Financeira</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== -->
+<!-- SEÇÃO SOBRE -->
+<!-- ==================== -->
+<section id="about" class="about">
+  <div class="container">
+    <h2>sobre a onepage studio</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>Fundada em 2025, a OnePage Studio já se consolidou como referência em desenvolvimento de páginas profissionais. Com uma equipe de 3 desenvolvedores especializados, já entregamos mais de 200 páginas que ajudaram nossos clientes a alcançarem seus objetivos digitais.</p>
+        
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">200+</div>
+            <div class="stat-label">páginas criadas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">desenvolvedores</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">clientes satisfeitos</div>
+          </div>
+        </div>
+        
+        <!-- Foto do escritório -->
+        <div class="office-photo" style="margin-top: 30px; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <img src="/imagens/escritorio.jpg" alt="Nosso escritório" style="width: 100%; height: auto; display: block; transition: transform 0.3s ease;">
+        </div>
+      </div>
+      
+      <!-- Missão, Visão e Valores -->
+      <div class="mission-vision">
+        <div class="mv-card">
+          <h3><i class="fas fa-bullseye"></i> missão</h3>
+          <p>desenvolver páginas web de alta performance que transformem visitantes em clientes, impulsionando os negócios de nossos clientes com tecnologia e design estratégico.</p>
+        </div>
+        
+        <div class="mv-card">
+          <h3><i class="fas fa-eye"></i> visão</h3>
+          <p>ser reconhecida como a melhor empresa de desenvolvimento de landing pages do brasil, conhecida pela excelência no atendimento e resultados excepcionais.</p>
+        </div>
+        
+        <div class="mv-card">
+          <h3><i class="fas fa-gem"></i> valores</h3>
+          <ul>
+            <li><i class="fas fa-check"></i> excelência técnica</li>
+            <li><i class="fas fa-check"></i> transparência</li>
+            <li><i class="fas fa-check"></i> foco em resultados</li>
+            <li><i class="fas fa-check"></i> inovação constante</li>
+            <li><i class="fas fa-check"></i> atendimento personalizado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== -->
+<!-- SEÇÃO CTA (CALL TO ACTION) -->
+<!-- ==================== -->
+<section id="cta" class="cta">
+  <div class="container">
+    <h2>pronto para transformar seu negócio?</h2>
+    <p>entre em contato agora mesmo ou agende uma reunião gratuita para discutirmos seu projeto.</p>
+    <div class="btn-container">
+      <a href="https://wa.me/5554996214447" class="btn btn-outline" target="_blank">
+        <i class="fas fa-calendar-alt"></i> agendar reunião
+      </a>
+      <a href="https://wa.me/5554996214447" class="btn btn-outline" target="_blank">
+        <i class="fab fa-whatsapp"></i> falar no whatsapp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== -->
+<!-- RODAPÉ -->
+<!-- ==================== -->
+<footer>
+  <div class="container footer-container">
+    <div class="footer-content">
+      <div class="footer-column" style="margin-top: -20px;">
+        <div class="logo">
+          <img src="/imagens/logo.png" alt="Logo CodePage" style="height: 120px"/>
+        </div>
+        <p style="line-height: 1.4; margin-bottom: 15px; margin-top: 0;">criação de páginas profissionais e desenvolvimento web sob demanda.</p>
+        <div class="social-links" style="margin-top: 10px;">
+          <a href="https://www.instagram.com/onepage.ia/" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/5554996214447" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h3>links rápidos</h3>
+        <ul>
+          <li><a href="#benefits">benefícios</a></li>
+          <li><a href="#process">como funciona</a></li>
+          <li><a href="#services">serviços</a></li>
+          <li><a href="#about">sobre</a></li>
+          <li><a href="#cta">contato</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h3>contato</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> onepagestudio.ia@gmail.com</li>
+          <li><i class="fas fa-phone"></i> (54) 99621-4447</li>
+          <li><i class="fas fa-map-marker-alt"></i> Passo Fundo, RS</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="copyright">
+      <p>&copy; 2025 OnePage Studio. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== -->
+<!-- SCRIPTS JAVASCRIPT -->
+<!-- ==================== -->
+<script>
+  // Mobile Menu Toggle
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    menuToggle.innerHTML = navLinks.classList.contains('active') ? 
+      '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+  });
+  
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      if(this.getAttribute('href') === '#') return;
+      
+      const target = document.querySelector(this.getAttribute('href'));
+      if(target) {
+        window.scrollTo({
+          top: target.offsetTop - 80,
+          behavior: 'smooth'
+        });
+        
+        // Close mobile menu if open
+        if(navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      }
+    });
+  });
+  
+  // Add shadow to header on scroll
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    if(window.scrollY > 10) {
+      header.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+    } else {
+      header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+    }
+  });
+
+  // Logo click behavior
+  const logo = document.querySelector('.logo');
+  
+  logo.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Verifica se já está no topo
+    if(window.scrollY === 0) {
+      window.location.reload();
+    } else {
+      // Vai para o topo e depois recarrega
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      
+      // Recarrega após chegar ao topo (opcional)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+  });
+
+  // Dark Mode Toggle
+  const themeToggle = document.querySelector('.theme-toggle');
+  const icon = themeToggle.querySelector('i');
+
+  // Verifica o tema atual
+  const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+  // Aplica o tema salvo
+  if (currentTheme === 'dark') {
+    document.body.setAttribute('data-theme', 'dark');
+    icon.classList.replace('fa-moon', 'fa-sun');
+  } else {
+    icon.classList.replace('fa-sun', 'fa-moon');
+  }
+
+  // Alterna o tema ao clicar
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = document.body.getAttribute('data-theme');
+    
+    if (currentTheme === 'dark') {
+      document.body.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'light');
+      icon.classList.replace('fa-sun', 'fa-moon');
+    } else {
+      document.body.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+  });
+</script>
+</body>
+</html>
